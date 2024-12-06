@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/05 00:42:18 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/06 01:20:36 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_fdf	*init_render(void)
 	fdf->win = mlx_new_window(fdf->mlx, 960, 540, "fdf");
 	fdf->img = mlx_new_image(fdf->mlx, 960, 540);
 	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->ll, &fdf->endian);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 480, 270);
 	return (fdf);
 }
 

@@ -3,12 +3,18 @@ LIB = libft.a
 LIB_DIR = libft
 SRC_RW = render_window
 SRC_PRS = parsing
+SRC_MAP = create_map
+SRC_TEST = test
+SRC_UTILS = utils
 
 SRC = main.c \
 	$(SRC_RW)/init_render.c \
 	$(SRC_RW)/make_pixel.c \
 	$(SRC_RW)/make_render.c \
 	$(SRC_PRS)/parsing.c \
+	$(SRC_MAP)/create_map.c \
+	$(SRC_TEST)/testing.c \
+	$(SRC_UTILS)/ft_split_scam.c \
 
 OBJ_DIR = obj
 
@@ -51,14 +57,14 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(LIB)
 # 	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $^ $(LIB_DIR)/$(LIB) -lXext -lX11 mlx_linux/libmlx.a -o $(NAME)
+	$(CC) $^ $(LIB_DIR)/$(LIB) -lm -lXext -lX11 mlx_linux/libmlx.a -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(LIB_DIR)
 
 fclean: clean
-	rm -rf $(NAME))
+	rm -rf $(NAME)
 
 re : fclean all
 

@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:21:50 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/05 01:58:36 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/06 01:15:31 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 
 int	main(int argc, char *argv[])
 {
-	// t_map *map;
+	t_map *map;
+	
 	if (argc == 2)
 	{
-	parse_map(argv[1]);
-	make_render();
+
+	map = parse_map(argv[1]);
+	show_stack(&map);
+	make_render(&map);
 	}
 	return (0);
 }
