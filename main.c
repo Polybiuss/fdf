@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:21:50 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/06 01:15:31 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/06 20:24:27 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	{
 
 	map = parse_map(argv[1]);
-	show_stack(&map);
+	// show_stack(&map);
 	make_render(&map);
 	}
 	return (0);

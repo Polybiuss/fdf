@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:02:36 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/06 02:22:12 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:02:48 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# define SCALE 3
+# define ANGLE 0.52
 
 typedef struct s_fdf
 {
@@ -38,6 +40,8 @@ typedef struct s_map
 	int 			z;
 	int				xp;
 	int				yp;
+	int				posy;
+	int				posx;
 	struct s_map	*next;
 } t_map;
 
