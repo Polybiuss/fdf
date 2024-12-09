@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 02:22:00 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/06 22:12:23 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:45:53 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ t_map	*create_stack_map(int x, int y, int z)
 		return (NULL);
 	new->x = x;
 	new->y = y;
-	new->z = z * 4;
-	new->xp = SCALE * (x - y) * cos(ANGLE);
-	new->yp = SCALE * (x + y) * sin(ANGLE) - new->z;
-	new->posx = (new->x * 20 + 480) + new->xp;
-	new->posy = (new->y * 20 + 270) + new->yp;
+	new->z = z;
+	new->rotatex = new->x * cos(ROTATION) - new->y * cos(ROTATION);
+	new->rotatey = new->x * sin(ROTATION) + new->y * cos(ROTATION);
+	new->xp = SCALE * ((new->x - new->rotatey) * (cos(ANGLE)));
+	new->yp = SCALE * ((new->x + new->rotatey) * sin(ANGLE) - new->z);
+	new->posx = (new->rotatex * ZOOM + WIDTH / 2) + new->xp;
+	new->posy = (new->rotatey * ZOOM + HEIGTH / 2) + new->yp;
 	new->next = NULL;
 	return (new);
 }

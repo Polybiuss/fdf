@@ -53,18 +53,19 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(LIB)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# $(NAME): $(OBJ)
-# 	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
 $(NAME): $(OBJ)
+	$(CC) $(OBJ) $(LIB_DIR)/$(LIB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+
+# $(NAME): $(OBJ)
 	$(CC) $^ $(LIB_DIR)/$(LIB) -lm -lXext -lX11 mlx_linux/libmlx.a -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_DIR)
-	rm -rf $(LIB_DIR)
+	make clean -sC $(LIB_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -sC $(LIB_DIR)
 
 re : fclean all
 
