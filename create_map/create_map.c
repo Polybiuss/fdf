@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 02:22:00 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/09 18:45:53 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/12 01:51:08 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,56 @@ t_map	*create_stack_map(int x, int y, int z)
 		return (NULL);
 	new->x = x;
 	new->y = y;
-	new->z = z;
-	new->rotatex = new->x * cos(ROTATION) - new->y * cos(ROTATION);
-	new->rotatey = new->x * sin(ROTATION) + new->y * cos(ROTATION);
-	new->xp = SCALE * ((new->x - new->rotatey) * (cos(ANGLE)));
-	new->yp = SCALE * ((new->x + new->rotatey) * sin(ANGLE) - new->z);
-	new->posx = (new->rotatex * ZOOM + WIDTH / 2) + new->xp;
-	new->posy = (new->rotatey * ZOOM + HEIGTH / 2) + new->yp;
+	new->z = z * 2;
+	new->rx = new->x;
+	new->ry = new->y;
+	new->rz = new->z;
+	new->color = NULL;
 	new->next = NULL;
 	return (new);
+}
+
+void	rotate_z(t_map *map)
+{
+	double	tmp;
+
+	tmp = map->rx;
+	map->rx = tmp * cos(GAMMA) - map->ry * sin(GAMMA);
+	map->ry = tmp * sin(GAMMA) + map->ry * cos(GAMMA);
+}
+
+void	rotate_y(t_map *map)
+{
+	double tmp;
+
+	tmp = map->rx;
+	map->rx = tmp * cos(TETHA) + map->rz * sin(TETHA);
+	map->rz = map->rz * cos(TETHA) - tmp * sin(TETHA);
+}
+
+void	rotate_x(t_map *map)
+{
+	double	tmp;
+
+	tmp = map->ry;
+	map->ry = tmp * cos(ALPHA) - map->rz * sin(ALPHA);
+	map->rz = tmp * sin(ALPHA) + map->rz * cos(ALPHA);
+}
+
+void	rotate_map(t_map **map, void (f)(t_map*), void (d)(t_map*), void (g)(t_map*))
+{
+	t_map *tmp;
+
+	if (!(*map))
+		return ;
+	tmp = (*map);
+	while (tmp)
+	{
+		f(tmp);
+		d(tmp);
+		g(tmp);
+		tmp = tmp->next;
+	}
 }
 
 void	map_add_back(t_map **head, t_map *back)

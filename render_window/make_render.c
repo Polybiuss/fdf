@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:42:40 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/09 18:07:02 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/12 00:28:11 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	point_map(t_map **map, t_fdf *fdf)
 	tmp = (*map);
 	while (tmp)
 	{
-		my_mlx_pixel_put(fdf, tmp->posx, tmp->posy, 0x00FF0000);
+		my_mlx_pixel_put(fdf, tmp->xp, tmp->yp, 0x00FF0000);
 		tmp = tmp->next;
 	}
 
@@ -47,13 +47,13 @@ t_line	create_line(t_map *start, t_map *end)
 {
 	t_line	line;
 
-	line.dx = abs(end->posx - start->posx);
-	line.dy = abs(end->posy - start->posy);
-	line.sx = (start->posx < end->posx) ? 1 : -1;
-	line.sy = (start->posy < end->posy) ? 1 : -1;
+	line.dx = fabs(end->xp - start->xp);
+	line.dy = fabs(end->yp - start->yp);
+	line.sx = (start->xp < end->xp) ? 1 : -1;
+	line.sy = (start->yp < end->yp) ? 1 : -1;
 	line.err = line.dx - line.dy;
-	line.x = start->posx;
-	line.y = start->posy;
+	line.x = start->xp;
+	line.y = start->yp;
 	return (line);
 }
 
@@ -67,7 +67,7 @@ void	draw_line(t_fdf *fdf, t_map *start, t_map *end)
 	while (1)
 	{
 		my_mlx_pixel_put(fdf, line.x, line.y, 0x00FF0000);
-		if (line.x == end->posx && line.y == end->posy)
+		if (line.x == end->xp && line.y == end->yp)
 			break ;
 		e2 = 2 * line.err;
 		if (e2 > -line.dy)
@@ -88,7 +88,7 @@ void	line_map(t_map **map, t_fdf *fdf)
 	t_map	*tmp;
 	t_map	*hoz;
 	t_map	*vert;
-	(void)fdf;
+
 	if (!(*map))
 		return ;
 	tmp = (*map);
@@ -119,5 +119,5 @@ void	make_render(t_map **map)
 	if (!fdf)
 		return ;
 	render_map(map, fdf);
-	loop_render(fdf);
+	// loop_render(fdf);
 }

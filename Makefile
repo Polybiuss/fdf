@@ -15,6 +15,7 @@ SRC = main.c \
 	$(SRC_MAP)/create_map.c \
 	$(SRC_TEST)/testing.c \
 	$(SRC_UTILS)/ft_split_scam.c \
+	$(SRC_RW)/make_render_plus.c \
 
 OBJ_DIR = obj
 
@@ -57,7 +58,7 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(LIB_DIR)/$(LIB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 # $(NAME): $(OBJ)
-	$(CC) $^ $(LIB_DIR)/$(LIB) -lm -lXext -lX11 mlx_linux/libmlx.a -o $(NAME)
+#	 $(CC) $^ $(LIB_DIR)/$(LIB) -lm -lXext -lX11 mlx_linux/libmlx.a -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_DIR)

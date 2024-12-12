@@ -6,11 +6,12 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/09 17:01:16 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/12 01:52:08 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include "../mlx_linux/mlx_int.h"
 
 int	key_hook(int keycode, t_fdf *fdf)
 {
@@ -18,6 +19,10 @@ int	key_hook(int keycode, t_fdf *fdf)
 	printf("Key: %d\n", keycode);
 	if (keycode == 65307)
 		quit(fdf);
+	if(keycode == 65361)
+		{
+			
+		}
 	return (0);
 }
 
@@ -55,12 +60,15 @@ t_fdf	*init_render(void)
 	return (fdf);
 }
 
-void	loop_render(t_fdf *fdf)
+void	loop_render(t_map_len *map, t_fdf *fdf)
 {
 	// t_fdf	*fdf;
 
+	(void)map;	
+	// printf("longueur %d\n", map->heigth);
 	// fdf = init_render();
-	mlx_key_hook(fdf->win, key_hook, fdf);
+	// f_de_merde(map, fdf);
+	printf("key_hook : %d", mlx_key_hook(fdf->win, key_hook, fdf));
 	mlx_hook(fdf->win, 17, 0, close_window, fdf);
 	mlx_loop(fdf->mlx);
 	quit(fdf);
