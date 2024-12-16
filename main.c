@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:21:50 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/11 21:34:51 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/16 03:27:45 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,15 @@ t_map_len	*create_map_len(t_map *map)
 		return (NULL);
 	map_len->width = width_map(map);
 	map_len->heigth = heigth_map(map);
-	map_len->mid_width = (map_len->width + 1) / 2;
-	map_len->mid_heigth = (map_len->heigth + 1) / 2;
+	map_len->alpha = 0.0;
+	map_len->gamma = 0.0;
+	map_len->theta = 0.0;
+	map_len->scalex = 0;
+	map_len->scaley = 0;
+	map_len->high = 1.0;
 	map_len->map = map;
+	map_len->zoom = 1;
+	map_len->projection = 0;
 	return (map_len);
 }
 

@@ -10,12 +10,12 @@ SRC_UTILS = utils
 SRC = main.c \
 	$(SRC_RW)/init_render.c \
 	$(SRC_RW)/make_pixel.c \
-	$(SRC_RW)/make_render.c \
 	$(SRC_PRS)/parsing.c \
 	$(SRC_MAP)/create_map.c \
-	$(SRC_TEST)/testing.c \
 	$(SRC_UTILS)/ft_split_scam.c \
 	$(SRC_RW)/make_render_plus.c \
+	$(SRC_TEST)/testing.c \
+	# $(SRC_RW)/make_render.c \
 
 OBJ_DIR = obj
 
