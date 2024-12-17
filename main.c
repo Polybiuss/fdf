@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:21:50 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/17 03:53:59 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/17 21:57:22 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,12 @@ int	main(int argc, char *argv[])
 		map = create_map_len(parse_map(argv[1]));
 		if (!map)
 		{
-			ft_putstr_fd("Err, map empty or wrong ext!", 2);
+			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
 		make_render_plus(map);
 	}
+	else
+		ft_putstr_fd("Error\n", 2);
 	return (0);
 }

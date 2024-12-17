@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 01:49:35 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/17 03:51:34 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/17 22:04:59 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	is_fdf_ext(char *str)
 		++i;
 	if (i < 3)
 		return (0);
-	if (str[i - 1] == 'f' && str[i - 2] == 'd' && str[i - 3] == 'f' && str[i - 4] == '.')
+	if (str[i - 1] == 'f' && str[i - 2]
+		== 'd' && str[i - 3]
+		== 'f' && str[i - 4]
+		== '.')
 		return (1);
 	return (0);
 }

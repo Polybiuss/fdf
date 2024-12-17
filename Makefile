@@ -1,6 +1,7 @@
 NAME = fdf
 LIB = libft.a
 LIB_DIR = libft
+MLX_DIR = mlx_linux
 SRC_RW = render_window
 SRC_PRS = parsing
 SRC_MAP = create_map
@@ -50,23 +51,35 @@ INFO = $(CYAN)[INFO]$(RESET)
 all : $(NAME)
 
 $(OBJ_DIR):
-	if [ ! -d $(OBJ_DIR) ]; then \
+	@if [ ! -d $(OBJ_DIR) ]; then \
+		echo "$(INFO) create $(OBJ_DIR)....$(GRAY)"; \
 		mkdir -p $(OBJ_DIR); \
+		echo "$(SUCCESS) $(OBJ_DIR) done !"; \
+	fi
+
+$(MLX_DIR):
+	@if [ -d ./$(MLX_DIR) ]; then \
+		echo "$(INFO) $(MLX_DIR) already exist"; \
+	else \
+		echo "$(INFO) git clone minilibx in directory mmlx_linux"; \
+		git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR); \
+		echo "$(INFO) Configure minilibx...$(GRAY)"; \
+		cd $(MLX_DIR) && ./configure && cd ..; \
+		echo "$(SUCCESS) minilibx done"; \
 	fi
 
 $(LIB):
 	@if [ -d ./$(LIB_DIR) ]; then \
-		echo "$(INFO) $(LIB_DIR) && git pull"; \
-		cd $(LIB_DIR) && git pull && cd ..; \
+		echo "$(INFO) $(LIB_DIR) already exist"; \
 	else \
 		echo "$(INFO) git clone Polybft in directory libft"; \
 		git clone https://github.com/Polybiuss/libft.git $(LIB_DIR); \
+		echo "$(INFO) Make $(LIB)..$(GRAY)"; \
+		make -sC $(LIB_DIR); \
+		echo "$(SUCCESS) Make done!"; \
 	fi
-	@echo "$(INFO) Make $(LIB)..$(GRAY)"
-	make -sC $(LIB_DIR)
-	@echo "$(SUCCESS) Make done!"
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(LIB)
+$(OBJ_DIR)/%.o: %.c | $(LIB) $(MLX_DIR) 
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -78,11 +91,11 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -rf $(OBJ_DIR)
-	make clean -sC $(LIB_DIR)
+	rm -rf $(LIB_DIR)
+	rm -rf $(MLX_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -sC $(LIB_DIR)
 
 re : fclean all
 
