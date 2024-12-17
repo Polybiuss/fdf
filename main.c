@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:21:50 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/16 03:27:45 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/17 03:53:59 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	width_map(t_map *map)
 {
-	t_map *tmp;
-	int	i;
+	t_map	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = map;
@@ -33,12 +33,12 @@ int	width_map(t_map *map)
 
 int	heigth_map(t_map *map)
 {
-	t_map *tmp;
-	int	i;
+	t_map	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = map;
-	while(tmp)
+	while (tmp)
 	{
 		i = tmp->y + 1;
 		tmp = tmp->next;
@@ -50,6 +50,8 @@ t_map_len	*create_map_len(t_map *map)
 {
 	t_map_len	*map_len;
 
+	if (!map)
+		return (NULL);
 	map_len = malloc(sizeof(t_map_len));
 	if (!map_len)
 		return (NULL);
@@ -67,20 +69,19 @@ t_map_len	*create_map_len(t_map *map)
 	return (map_len);
 }
 
-
-
 int	main(int argc, char *argv[])
 {
-	t_map_len *map;
-	// t_map	*map;
+	t_map_len	*map;
+
 	if (argc == 2)
 	{
-	map = create_map_len(parse_map(argv[1]));
-	// map = parse_map(argv[1]);
-	// show_stack(&map->map);
-	// ft_printf("width : %d, heigth : %d, mid_width : %d, mid_heigth : %d\n", map->width, map->heigth, map->mid_width, map->mid_heigth);
-	make_render_plus(map);
-	// make_render(&map);
+		map = create_map_len(parse_map(argv[1]));
+		if (!map)
+		{
+			ft_putstr_fd("Err, map empty or wrong ext!", 2);
+			return (0);
+		}
+		make_render_plus(map);
 	}
 	return (0);
 }

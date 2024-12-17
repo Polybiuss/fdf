@@ -1,53 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   hexa_to_int_scam.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 01:49:35 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/17 03:51:34 by jbergos          ###   ########.fr       */
+/*   Created: 2024/12/17 03:37:03 by jbergos           #+#    #+#             */
+/*   Updated: 2024/12/17 03:38:41 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	is_fdf_ext(char *str)
+int	is_comma(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
+	{
+		if (str[i] == ',')
+			return (1);
 		++i;
-	if (i < 3)
-		return (0);
-	if (str[i - 1] == 'f' && str[i - 2] == 'd' && str[i - 3] == 'f' && str[i - 4] == '.')
-		return (1);
+	}
 	return (0);
 }
 
-t_map	*parse_map(char *str)
+int	hexa_to_int(char *z)
 {
-	int		fd;
-	int		i;
-	char	*line;
-	t_map	*map;
+	int	res;
+	int	value;
+	int	i;
 
-	if (!is_fdf_ext(str))
-		return (NULL);
-	fd = open(str, O_RDONLY);
-	line = get_next_line(fd);
 	i = 0;
-	map = NULL;
-	while (line)
+	value = 0;
+	if (z[0] == '0' && (z[1] == 'x' || z[1] == 'X'))
+		i = 2;
+	while (z[i])
 	{
-		create_map(&map, line, i);
-		free(line);
-		line = get_next_line(fd);
+		if (ft_isdigit(z[i]))
+			value = z[i] - '0';
+		else if (z[i] >= 'A' && z[i] <= 'F')
+			value = z[i] - 'A' + 10;
+		else
+			value = z[i] - 'a' + 10;
+		res = res * 16 + value;
 		++i;
 	}
-	if (line)
-		free(line);
-	get_next_line(-1);
-	return (map);
+	return (res);
+}
+
+int	hexa_color(char *z)
+{
+	int	i;
+
+	i = 0;
+	while (z[i] != ',')
+		++i;
+	++i;
+	return (hexa_to_int(z + i));
 }

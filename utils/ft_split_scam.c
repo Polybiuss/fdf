@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 22:31:20 by jbergos           #+#    #+#             */
-/*   Updated: 2024/12/05 23:05:42 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/12/17 03:39:29 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	find_char(char c, char	*charset)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i])
@@ -29,7 +29,7 @@ static int	find_char(char c, char	*charset)
 static size_t	count_word(char *str, char *charset)
 {
 	int	i;
-	int count;
+	int	count;
 
 	count = 0;
 	i = 0;
@@ -71,7 +71,7 @@ char	**ft_split_scam(char *s, char *charset)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (j < count_word(s ,charset))
+	while (j < count_word(s, charset))
 	{
 		while (s[i] && find_char(s[i], charset))
 			++i;

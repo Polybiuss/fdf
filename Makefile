@@ -6,15 +6,31 @@ SRC_PRS = parsing
 SRC_MAP = create_map
 SRC_TEST = test
 SRC_UTILS = utils
+SRC_CLR = color
+SRC_FREE = free
+SRC_HKS = hooks
+SRC_PRJ = projections
 
 SRC = main.c \
 	$(SRC_RW)/init_render.c \
 	$(SRC_RW)/make_pixel.c \
+	$(SRC_RW)/rotate.c \
 	$(SRC_PRS)/parsing.c \
 	$(SRC_MAP)/create_map.c \
 	$(SRC_UTILS)/ft_split_scam.c \
 	$(SRC_RW)/make_render_plus.c \
 	$(SRC_TEST)/testing.c \
+	$(SRC_CLR)/color.c \
+	$(SRC_CLR)/interpolate.c \
+	$(SRC_FREE)/free.c \
+	$(SRC_HKS)/scale_hook.c \
+	$(SRC_HKS)/rotate_hook.c \
+	$(SRC_HKS)/zoom_n_high.c \
+	$(SRC_HKS)/reset_hook.c \
+	$(SRC_HKS)/projection_hook.c \
+	$(SRC_PRJ)/projection_x.c \
+	$(SRC_PRJ)/projection_y.c \
+	$(SRC_UTILS)/hexa_to_int_scam.c \
 	# $(SRC_RW)/make_render.c \
 
 OBJ_DIR = obj
